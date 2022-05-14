@@ -1,0 +1,75 @@
+.card {
+  background-color: #FFFFD4;
+  width: 300px;
+  height: 130px;
+  border: 1px solid #FFFFD4;
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  margin-top: 20px;
+  position:relative;
+  transition: all .5s;
+  transform-style: preserve-3d;
+  padding: 16px 12px;
+
+  color:#333333;
+  font-family: 'Recursive', sans-serif;
+  font-size:16px;
+  word-break: break-all;
+}
+
+
+
+.face {
+  backface-visibility: hidden;
+}
+
+.front {
+  transform: rotateY(180deg);
+}
+
+.flip {
+  transform: rotateY(180deg);
+}
+
+.front img {
+  position: absolute;
+  top:78px;
+  right:4px;
+}
+
+.flashcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 100px;
+}
+
+.flashcard   button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  width: 300px;
+  height: 60px;
+  color:#333333;
+  font-family: 'Recursive', sans-serif;
+  font-weight: 700;
+  font-size:14px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  padding: 12px;
+  margin-top: 20px;
+}
+
+
+.flashcard button:hover {
+   filter: brightness(1.5);
+   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.15);
+}
+
+.flashcard ion-icon {
+  color:#333333;
+  font-size: 30px;
+}
