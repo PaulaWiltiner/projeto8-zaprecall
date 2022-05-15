@@ -19,6 +19,8 @@ function shuffle() {
 
 listaCards.sort(shuffle);
 
+
+
 function Card(props) {
 
   const [init, setInit] = React.useState(0);
@@ -27,6 +29,13 @@ function Card(props) {
   const [iconame, setIcon] = React.useState("play-outline");
   const [statusbutton, setButton] = React.useState(false);
   const [statusButtonSecond, setButtonSecond] = React.useState(true);
+
+
+  function mandaLista(color,name){
+    let elemento={classIcon:color,nomeIcon:name};
+    props.listaIcon.push(elemento);
+    props.setIconesLista(props.listaIcon);
+  }
 
   return(
     <div>
@@ -44,9 +53,18 @@ function Card(props) {
             <div className='back face'>
               <p>{props.answer}</p>
               <div className='button_list'>
-                <button className='not_remember'onClick={()=> [setClassQuestion('stylered'),setInit('0'),setIcon('close-circle'),setButton(true)]} disabled={statusButtonSecond} > Não lembrei </button>
-                <button className='almost_remember' onClick={()=> [setClassQuestion('styleorange'),setInit('0'),setIcon('help-circle'), setButton(true)]} disabled={statusButtonSecond} > Quase não lembrei </button>
-                <button className='zap'onClick={()=> [setClassQuestion('stylegreen'),setInit('0'),setIcon('checkmark-circle'),setButton(true)]} disabled={statusButtonSecond} > Zap! </button>
+                <button className='not_remember'onClick={()=> 
+                  [setClassQuestion('stylered'),setInit('0'),setIcon('close-circle'),setButton(true),props.setValue(props.value+1),mandaLista('stylered','close-circle'),props.setRemember(1)]} disabled={statusButtonSecond} > 
+                  Não lembrei 
+                </button>
+                <button className='almost_remember' onClick={()=> 
+                  [setClassQuestion('styleorange'),setInit('0'),setIcon('help-circle'), setButton(true),props.setValue(props.value+1),mandaLista('styleorange','help-circle')]} disabled={statusButtonSecond} > 
+                  Quase não lembrei 
+                </button>
+                <button className='zap'onClick={()=> 
+                  [setClassQuestion('stylegreen'),setInit('0'),setIcon('checkmark-circle'),setButton(true),props.setValue(props.value+1),mandaLista('stylegreen','checkmark-circle')]} disabled={statusButtonSecond} > 
+                  Zap! 
+                </button>
               </div>
             </div>
           </div>
@@ -57,15 +75,18 @@ function Card(props) {
 
 
 
-export default function FlashCards() {
+export default function FlashCards(props) {
 
+  const {val:value , function_one:setValue, listaIcones:listaIcon, function_two:setIconesLista, function_three:setRemember}=props;
 
   return(
     <div className='flashcard'>
       
-      { listaCards.map((elem,index) => <Card key={index+1} numberKey={index+1} question={elem.question} answer={elem.answer} />) }
-        
-    </div>
+      { 
+      listaCards.map((elem,index) => <Card key={index+1} setRemember={setRemember} listaIcon={listaIcon} setIconesLista={setIconesLista} value={value} setValue={setValue} numberKey={index+1} question={elem.question} answer={elem.answer} />) 
+      }
+
+    </div> 
 
   )
 } 

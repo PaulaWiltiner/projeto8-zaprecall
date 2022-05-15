@@ -1,11 +1,11 @@
 import './Footer.css'
 
 
-export default function Footer() {
+export default function Footer(props) {
 
   return(
     <div className='footer'>
-      <p>0/4 CONCLUÍDOS</p>
+      {props.children}
     </div>
   )
 } 
