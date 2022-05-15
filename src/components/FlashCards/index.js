@@ -2,67 +2,69 @@ import './FlashCards.css'
 import React from 'react';
 import turn from '../../assets/images/setinha.png';
 
+let listaCards=[{question:'O que é JSX?', answer:'Uma extensão de linguagem do JavaScript'},
+  {question:'O React é __ ' ,answer:'uma biblioteca JavaScript para construção de interfaces'},
+  {question:'Componentes devem iniciar com __ ' ,answer:'letra maiúscula'},
+  {question:'Podemos colocar __ dentro do JSX ' ,answer:'expressões'},
+  {question:'O ReactDOM nos ajuda __ ' ,answer:'interagindo com a DOM para colocar componentes React na mesma'},
+  {question:'Usamos o npm para __ ' ,answer:'gerenciar os pacotes necessários e suas dependências'},
+  {question:'Usamos props para __ ' ,answer:'passar diferentes informações para componentes'} ,
+  {question:'Usamos estado (state) para __ ', answer:'dizer para o React quais informações quando atualizadas devem renderizar a tela novamente'}]
+  
+ 
+
+function shuffle() { 
+  return Math.random() - 0.5; 
+}
+
+listaCards.sort(shuffle);
+
+function Card(props) {
+
+  const [init, setInit] = React.useState(0);
+  const [newclass, setClass] = React.useState('card flip');
+  const [colorName, setClassQuestion] = React.useState('styleblack');
+  const [iconame, setIcon] = React.useState("play-outline");
+  const [statusbutton, setButton] = React.useState(false);
+  const [statusButtonSecond, setButtonSecond] = React.useState(true);
+
+  return(
+    <div>
+        { (init!==props.numberKey ) ?
+          <button className={'question '+ colorName}  onClick={() => [setInit(props.numberKey)]} disabled={statusbutton} >
+            Pergunta {props.numberKey}
+            <ion-icon  name={iconame}></ion-icon>
+          </button>
+          : 
+          <div className={newclass} >
+            <div className='front face'>
+              <p>{props.question}</p>
+              <img src={turn} alt='seta para virar carta'  onClick={()=> [setClass('card'),setButtonSecond(false)]} />
+            </div>
+            <div className='back face'>
+              <p>{props.answer}</p>
+              <div className='button_list'>
+                <button className='not_remember'onClick={()=> [setClassQuestion('stylered'),setInit('0'),setIcon('close-circle'),setButton(true)]} disabled={statusButtonSecond} > Não lembrei </button>
+                <button className='almost_remember' onClick={()=> [setClassQuestion('styleorange'),setInit('0'),setIcon('help-circle'), setButton(true)]} disabled={statusButtonSecond} > Quase não lembrei </button>
+                <button className='zap'onClick={()=> [setClassQuestion('stylegreen'),setInit('0'),setIcon('checkmark-circle'),setButton(true)]} disabled={statusButtonSecond} > Zap! </button>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+  )
+}
+
 
 
 export default function FlashCards() {
 
-  const [init, setInit] = React.useState(false);
-  const [newclass, setClass] = React.useState('card flip');
 
   return(
     <div className='flashcard'>
-    
-        { !init ?
-          <button onClick={() => setInit(true)} >
-            Pergunta 1
-            <ion-icon name="play-outline"></ion-icon>
-          </button>
-          : 
-            <div className={newclass} >
-              <div className='front face'>
-                <p>O que é JSX ?</p>
-                <img src={turn} alt='seta para virar carta'  onClick={()=> setClass('card')} />
-              </div>
-              <div className='back face'>
-                <p>JSX é uma sintaxe para escrever HTML dentro do JS</p>
-                <div className='button_list'>
-                  <button className='not_remenber'>Não lembrei</button>
-                  <button>Quase não lembrei</button>
-                  <button>Zap!</button>
-                </div>
-              </div>
-          </div>
-        }
+      
+      { listaCards.map((elem,index) => <Card key={index+1} numberKey={index+1} question={elem.question} answer={elem.answer} />) }
         
-    
-      <button >
-        Pergunta 2
-        <ion-icon name="play-outline"></ion-icon>
-      </button>
-      <button >
-        Pergunta 3
-        <ion-icon name="play-outline"></ion-icon>
-      </button>
-      <button >
-        Pergunta 4
-        <ion-icon name="play-outline"></ion-icon>
-      </button>
-      <button >
-        Pergunta 5
-        <ion-icon name="play-outline"></ion-icon>
-      </button>
-      <button >
-        Pergunta 6
-        <ion-icon name="play-outline"></ion-icon>
-      </button>
-      <button >
-        Pergunta 7
-        <ion-icon name="play-outline"></ion-icon>
-      </button>
-      <button >
-        Pergunta 8
-        <ion-icon name="play-outline"></ion-icon>
-      </button>
     </div>
 
   )
