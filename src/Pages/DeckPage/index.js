@@ -5,6 +5,7 @@ import './DeckPage.css'
 import React from 'react';
 import emoji_party from '../../assets/images/party.png'
 import emoji_sad from '../../assets/images/sad.png'
+import { Link } from "react-router-dom";
 
 export default function DeckPage() {
 
@@ -37,6 +38,11 @@ export default function DeckPage() {
               }
             </div>
           }
+          <div class='reinicio'>
+           {value!==8 ? '': 
+            <Link to='/' ><button >REINICIAR RECALL</button></Link>
+           }
+           </div>
         </Footer>
       </div>
   )
