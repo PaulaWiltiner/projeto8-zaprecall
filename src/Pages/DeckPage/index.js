@@ -38,7 +38,7 @@ export default function DeckPage() {
               }
             </div>
           }
-          <div class='reinicio'>
+          <div className='reinicio'>
            {value!==8 ? '': 
             <Link to='/' ><button >REINICIAR RECALL</button></Link>
            }

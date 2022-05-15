@@ -17,7 +17,6 @@ function shuffle() {
   return Math.random() - 0.5; 
 }
 
-listaCards.sort(shuffle);
 
 
 
@@ -76,6 +75,8 @@ function Card(props) {
 
 
 export default function FlashCards(props) {
+
+  listaCards.sort(shuffle);
 
   const {val:value , function_one:setValue, listaIcones:listaIcon, function_two:setIconesLista, function_three:setRemember}=props;
 
